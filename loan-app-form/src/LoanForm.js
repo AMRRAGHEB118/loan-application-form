@@ -7,7 +7,7 @@ export default function LoadForm() {
     name: "",
     phone: "",
     age: "",
-    ask: false,
+    is_employee: false,
     salary: "",
   });
 
@@ -17,17 +17,35 @@ export default function LoadForm() {
         <form>
           <h1 style={{ marginBottom: "30px" }}>Requesting a Loan</h1>
           <div className="inputbox">
-            <input required="required" type="text" />
+            <input
+              required="required"
+              type="text"
+              onChange={(e) => {
+                set_loan_form({ ...loan_form, name: e.target.value });
+              }}
+            />
             <span>Name</span>
             <i></i>
           </div>
           <div className="inputbox">
-            <input required="required" type="text" />
+            <input
+              required="required"
+              type="text"
+              onChange={(e) => {
+                set_loan_form({ ...loan_form, phone: e.target.value });
+              }}
+            />
             <span>Phone Number</span>
             <i></i>
           </div>
           <div className="inputbox">
-            <input required="required" type="text" />
+            <input
+              required="required"
+              type="text"
+              onChange={(e) => {
+                set_loan_form({ ...loan_form, age: e.target.value });
+              }}
+            />
             <span>Age</span>
             <i></i>
           </div>
@@ -35,17 +53,29 @@ export default function LoadForm() {
             <label>Are you a employee ?</label>
             <br></br>
             <br></br>
-            <input type="checkbox" />
+            <input
+              required
+              type="checkbox"
+              onChange={(e) => {
+                set_loan_form({ ...loan_form, is_employee: e.target.checked });
+              }}
+            />
           </div>
           <div className="inputbox">
             <label>Salary</label>
             <br></br>
             <br></br>
-            <select>
+            <select
+              onChange={(e) => {
+                set_loan_form({ ...loan_form, salary: e.target.value });
+              }}
+            >
               <option hidden>Choose Salary</option>
-              <option>less than 500$</option>
-              <option>between 500$ and 2000$</option>
-              <option>above 2000$</option>
+              <option value={"less than 500$"}>less than 500$</option>
+              <option value={"between 500$ and 2000$"}>
+                between 500$ and 2000$
+              </option>
+              <option value={"above 2000$"}>above 2000$</option>
             </select>
           </div>
           <button>Submit</button>
