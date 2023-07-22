@@ -1,7 +1,15 @@
-.form-container {
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#form-container {
   width: 50%;
   min-height: 50%;
-  margin: 100px auto;
   background-color: #b8bac8;
   border-radius: 20px;
 }

@@ -1,0 +1,18 @@
+#model {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.486);
+  width: 100vw;
+  height: 100vh;
+}
+
+#model-content {
+  background-color: #2f3e46;
+  color: white;
+  padding: 20px;
+  border-radius: 20px;
+}
