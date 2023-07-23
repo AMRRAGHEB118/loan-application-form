@@ -1,3 +1,4 @@
+import Input from "./Input";
 import "./LoanForm.css";
 import Model from "./Model";
 import { useState } from "react";
@@ -19,11 +20,21 @@ export default function LoadForm() {
     const { phone, age } = loan_form;
     if (age < 18 || age > 100) {
       set_error_message("The age is not allowed");
-    }else if (phone.length < 10 || phone.length > 12) {
+    } else if (phone.length < 10 || phone.length > 12) {
       set_error_message("The phone number is incorrect");
     }
 
     set_show_model(true);
+  };
+
+  const handle_name_input_change = (name) => {
+    set_loan_form({ ...loan_form, name: name });
+  };
+  const handle_phone_input_change = (phone) => {
+    set_loan_form({ ...loan_form, phone: phone });
+  };
+  const handle_age_input_change = (age) => {
+    set_loan_form({ ...loan_form, age: +age });
   };
 
   return (
@@ -36,39 +47,12 @@ export default function LoadForm() {
       <div id="form-container">
         <form>
           <h1 style={{ marginBottom: "30px" }}>Requesting a Loan</h1>
-          <div className="inputbox">
-            <input
-              required="required"
-              type="text"
-              onChange={(e) => {
-                set_loan_form({ ...loan_form, name: e.target.value });
-              }}
-            />
-            <span>Name</span>
-            <i></i>
-          </div>
-          <div className="inputbox">
-            <input
-              required="required"
-              type="text"
-              onChange={(e) => {
-                set_loan_form({ ...loan_form, phone: e.target.value });
-              }}
-            />
-            <span>Phone Number</span>
-            <i></i>
-          </div>
-          <div className="inputbox">
-            <input
-              required="required"
-              type="text"
-              onChange={(e) => {
-                set_loan_form({ ...loan_form, age: +e.target.value });
-              }}
-            />
-            <span>Age</span>
-            <i></i>
-          </div>
+          <Input title="Name" handle_change={handle_name_input_change} />
+          <Input
+            title="Phone Number"
+            handle_change={handle_phone_input_change}
+          />
+          <Input title="Age" handle_change={handle_age_input_change} />
           <div className="inputbox">
             <label>Are you a employee ?</label>
             <br></br>
