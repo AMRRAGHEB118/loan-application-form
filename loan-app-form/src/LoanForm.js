@@ -3,16 +3,36 @@ import Model from "./Model";
 import { useState } from "react";
 
 export default function LoadForm() {
+  const [error_message, set_error_message] = useState(null);
+  const [show_model, set_show_model] = useState(false);
   const [loan_form, set_loan_form] = useState({
     name: "",
     phone: "",
-    age: "",
+    age: 0,
     is_employee: false,
     salary: "",
   });
 
+  const handle_loan_form = (e) => {
+    e.preventDefault();
+    set_error_message(null);
+    const { phone, age } = loan_form;
+    if (age < 18 || age > 100) {
+      set_error_message("The age is not allowed");
+    }else if (phone.length < 10 || phone.length > 12) {
+      set_error_message("The phone number is incorrect");
+    }
+
+    set_show_model(true);
+  };
+
   return (
-    <div id="container">
+    <div
+      id="container"
+      onClick={() => {
+        if (show_model) set_show_model(false);
+      }}
+    >
       <div id="form-container">
         <form>
           <h1 style={{ marginBottom: "30px" }}>Requesting a Loan</h1>
@@ -43,7 +63,7 @@ export default function LoadForm() {
               required="required"
               type="text"
               onChange={(e) => {
-                set_loan_form({ ...loan_form, age: e.target.value });
+                set_loan_form({ ...loan_form, age: +e.target.value });
               }}
             />
             <span>Age</span>
@@ -78,10 +98,10 @@ export default function LoadForm() {
               <option value={"above 2000$"}>above 2000$</option>
             </select>
           </div>
-          <button>Submit</button>
+          <button onClick={handle_loan_form}>Submit</button>
         </form>
       </div>
-      {/* <Model /> */}
+      <Model error_message={error_message} is_visible={show_model} />
     </div>
   );
 }
