@@ -2,6 +2,7 @@ import Input from "./Input";
 import "./LoanForm.css";
 import Model from "./Model";
 import { useState } from "react";
+import { loanInpputsContext } from "./contexts/loan_form_inputs";
 
 export default function LoadForm() {
   const [error_message, set_error_message] = useState(null);
@@ -47,12 +48,25 @@ export default function LoadForm() {
       <div id="form-container">
         <form>
           <h1 style={{ marginBottom: "30px" }}>Requesting a Loan</h1>
-          <Input title="Name" handle_change={handle_name_input_change} />
-          <Input
-            title="Phone Number"
-            handle_change={handle_phone_input_change}
-          />
-          <Input title="Age" handle_change={handle_age_input_change} />
+          <loanInpputsContext.Provider
+            value={{ title: "Name", handle_change: handle_name_input_change }}
+          >
+            <Input />
+          </loanInpputsContext.Provider>
+          <loanInpputsContext.Provider
+            value={{
+              title: "Phone Number",
+              handle_change: handle_phone_input_change,
+            }}
+          >
+            <Input />
+          </loanInpputsContext.Provider>
+          <loanInpputsContext.Provider
+            value={{ title: "Age", handle_change: handle_age_input_change }}
+          >
+            <Input />
+          </loanInpputsContext.Provider>
+
           <div className="inputbox">
             <label>Are you a employee ?</label>
             <br></br>

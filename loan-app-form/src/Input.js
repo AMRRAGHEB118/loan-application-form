@@ -1,4 +1,9 @@
-export default function Input({ title, handle_change }) {
+import { useContext } from "react";
+import { loanInpputsContext } from "./contexts/loan_form_inputs";
+
+export default function Input() {
+  const {title, handle_change} = useContext(loanInpputsContext)
+
   return (
     <div className="inputbox">
       <input
